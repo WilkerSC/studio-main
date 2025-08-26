@@ -1,7 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { MapPin, Phone, Mail, Send, CheckCircle } from 'lucide-react';
 
 const Contact = () => {
+  const contactRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = contactRef.current;
+    if (!el) return;
+    const observer = new window.IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          (entry.target as HTMLElement).classList.add('animate-fade-in-up');
+        } else {
+          (entry.target as HTMLElement).classList.remove('animate-fade-in-up');
+          (entry.target as HTMLElement).style.transition = 'opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1)';
+          (entry.target as HTMLElement).style.opacity = '0';
+          (entry.target as HTMLElement).style.transform = 'translateY(24px) scale(1)';
+        }
+      });
+    }, { threshold: 0.15 });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -46,7 +65,7 @@ const Contact = () => {
 
   return (
   <section id="contact" className="py-20 bg-white dark:bg-[#140F1E] transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <div ref={contactRef} className="max-w-7xl mx-auto px-6 lg:px-8 opacity-0">
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-4">

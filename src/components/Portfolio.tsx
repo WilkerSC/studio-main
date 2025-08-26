@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const Portfolio = () => {
+  // Ref para grid de imagens
+  const gridRef = useRef<HTMLDivElement>(null);
   const [filter, setFilter] = useState('all');
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -23,6 +25,32 @@ const Portfolio = () => {
   ];
 
   const filteredImages = filter === 'all' ? images : images.filter(img => img.category === filter);
+    useEffect(() => {
+      const grid = gridRef?.current;
+      if (!grid) return;
+      const children = Array.from(grid.children);
+      // Inicialmente, todos invisíveis
+      children.forEach((child) => {
+        (child as HTMLElement).style.opacity = '0';
+        (child as HTMLElement).style.transform = 'translateY(24px) scale(1)';
+      });
+      const observer = new window.IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            (entry.target as HTMLElement).classList.add('animate-fade-in-up');
+          } else {
+            (entry.target as HTMLElement).classList.remove('animate-fade-in-up');
+            (entry.target as HTMLElement).style.transition = 'opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1)';
+            (entry.target as HTMLElement).style.opacity = '0';
+            (entry.target as HTMLElement).style.transform = 'translateY(24px) scale(1)';
+          }
+        });
+      }, { threshold: 0.15 });
+      children.forEach((child) => {
+        observer.observe(child);
+      });
+      return () => observer.disconnect();
+    }, [filteredImages]);
 
   return (
     <section id="portfolio" className="py-20 bg-gray-50 dark:bg-[#181622] transition-colors duration-300">
@@ -53,7 +81,7 @@ const Portfolio = () => {
         </div>
 
         {/* GRID grande */}
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(330px,1fr))] gap-8 xl:gap-12">
+  <div ref={gridRef} className="grid grid-cols-[repeat(auto-fit,minmax(330px,1fr))] gap-8 xl:gap-12">
           {filteredImages.map((image) => (
             <div
               key={image.id}

@@ -1,7 +1,24 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Camera, Users, Building, Heart } from 'lucide-react';
 
 const Services = () => {
+  const servicesRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = servicesRef.current;
+    if (!el) return;
+    const observer = new window.IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              (entry.target as HTMLElement).classList.add('animate-fade-in-up');
+            } else {
+              (entry.target as HTMLElement).classList.remove('animate-fade-in-up');
+              (entry.target as HTMLElement).style.transition = 'opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1)';
+            }
+      });
+    }, { threshold: 0.15 });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
   const services = [
     {
       icon: <Camera className="w-12 h-12" />,
@@ -35,7 +52,7 @@ const Services = () => {
 
   return (
     <section id="services" className="py-20 bg-gray-50 dark:bg-[#181622] transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <div ref={servicesRef} className="max-w-7xl mx-auto px-6 lg:px-8 opacity-0">
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-4">

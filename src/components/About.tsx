@@ -1,7 +1,26 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Camera, Award, Users, Heart } from 'lucide-react';
 
 const About = () => {
+  const aboutRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = aboutRef.current;
+    if (!el) return;
+    const observer = new window.IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          (entry.target as HTMLElement).classList.add('animate-fade-in-up');
+        } else {
+          (entry.target as HTMLElement).classList.remove('animate-fade-in-up');
+          (entry.target as HTMLElement).style.transition = 'opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1)';
+          (entry.target as HTMLElement).style.opacity = '0';
+          (entry.target as HTMLElement).style.transform = 'translateY(24px) scale(1)';
+        }
+      });
+    }, { threshold: 0.15 });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
   const stats = [
     { icon: <Camera className="w-8 h-8" />, number: '500+', label: 'Projetos Realizados' },
     { icon: <Award className="w-8 h-8" />, number: '15+', label: 'Prêmios Conquistados' },
@@ -11,7 +30,7 @@ const About = () => {
 
   return (
     <section id="about" className="py-20 bg-white dark:bg-[#140F1E] transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <div ref={aboutRef} className="max-w-7xl mx-auto px-6 lg:px-8 opacity-0">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Image */}
           <div className="relative">
