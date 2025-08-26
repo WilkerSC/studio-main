@@ -1,5 +1,6 @@
 import React from 'react';
 import { ChevronDown } from 'lucide-react';
+import TypingEffect from './TypingEffect';
 
 const Hero = () => {
   const scrollToPortfolio = () => {
@@ -28,12 +29,14 @@ const Hero = () => {
       <div className="relative z-10 flex items-center justify-center h-full text-center text-white px-6">
         <div className="max-w-4xl">
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-light mb-6 leading-tight">
-            Capturando
-            <span className="block font-thin text-purple-300 drop-shadow-lg">Momentos</span>
-            Eternos
+            <TypingEffect text={"Capturando"} speed={120} className="font-playfair" />
+            <span className="block font-thin text-purple-300 drop-shadow-lg">
+              <TypingEffect text={"Momentos"} speed={120} className="font-playfair" />
+            </span>
+            <TypingEffect text={"Eternos"} speed={120} className="font-playfair" />
           </h1>
           <p className="text-xl md:text-2xl font-light mb-12 max-w-2xl mx-auto leading-relaxed opacity-90">
-            Fotógrafo profissional especializado em retratos, casamentos e eventos corporativos
+            <TypingEffect text={"Fotógrafo profissional especializado em retratos, casamentos e eventos corporativos"} speed={40} className="font-playfair" />
           </p>
           <button 
             onClick={scrollToPortfolio}

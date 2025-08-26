@@ -1,3 +1,14 @@
+/* Importando fontes do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@400;700&display=swap');
+
+/* Estilos para testar Montserrat e Playfair Display */
+.font-montserrat {
+  font-family: 'Montserrat', sans-serif;
+}
+.font-playfair {
+  font-family: 'Playfair Display', serif;
+}
+
 /* Fade-in up animation para todas as seções */
 .animate-fade-in-up {
 	opacity: 1 !important;
