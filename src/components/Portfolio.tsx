@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
-import { X } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const Portfolio = () => {
   const [filter, setFilter] = useState('all');
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   const images = [
-    { id: 1, src: 'https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=800&h=800&fit=crop', category: 'portrait',  title: 'Retrato Elegante' },
-    { id: 2, src: 'https://images.pexels.com/photos/1587927/pexels-photo-1587927.jpeg?auto=compress&cs=tinysrgb&w=800&h=800&fit=crop', category: 'wedding',   title: 'Momento Único' },
-    { id: 3, src: 'https://images.pexels.com/photos/1043473/pexels-photo-1043473.jpeg?auto=compress&cs=tinysrgb&w=800&h=800&fit=crop', category: 'portrait',  title: 'Expressão Natural' },
-    { id: 4, src: 'https://images.pexels.com/photos/2253879/pexels-photo-2253879.jpeg?auto=compress&cs=tinysrgb&w=800&h=800&fit=crop', category: 'corporate', title: 'Profissionalismo' },
-    { id: 5, src: 'https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=800&h=1200&fit=crop', category: 'wedding',   title: 'Celebração' },
-    { id: 6, src: 'https://images.pexels.com/photos/1858175/pexels-photo-1858175.jpeg?auto=compress&cs=tinysrgb&w=800&h=800&fit=crop', category: 'portrait',  title: 'Intimidade' },
-    { id: 7, src: 'https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg?auto=compress&cs=tinysrgb&w=800&h=1200&fit=crop', category: 'corporate', title: 'Liderança' },
-    { id: 8, src: 'https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',  category: 'wedding',   title: 'Romance' }
+    { id: 1, src: '/Coraline.jpeg', category: 'portrait',  title: 'Retrato Elegante' },
+    { id: 2, src: '/Flor.jpeg', category: 'wedding',   title: 'Momento Único' },
+    { id: 3, src: '/Fonte.jpeg', category: 'portrait',  title: 'Expressão Natural' },
+    { id: 4, src: '/Foto_Luana.jpeg', category: 'corporate', title: 'Profissionalismo' },
+    { id: 5, src: '/Museu.jpeg', category: 'wedding',   title: 'Celebração' },
+    { id: 6, src: '/Pinheiro.jpeg', category: 'portrait',  title: 'Intimidade' },
   ];
 
   const categories = [
@@ -58,7 +57,10 @@ const Portfolio = () => {
           {filteredImages.map((image) => (
             <div
               key={image.id}
-              onClick={() => setSelectedImage(image.src)}
+              onClick={() => {
+                setSelectedImage(image.src);
+                setSelectedIndex(filteredImages.findIndex(img => img.src === image.src));
+              }}
               className="group relative overflow-hidden rounded-3xl bg-gray-200 dark:bg-gray-700 cursor-pointer
                          shadow-xl ring-1 ring-black/5 dark:ring-white/10
                          transition-all duration-300 hover:-translate-y-1
@@ -85,10 +87,39 @@ const Portfolio = () => {
         {selectedImage && (
           <div className="fixed inset-0 bg-black bg-opacity-95 z-50 flex items-center justify-center p-8 backdrop-blur-sm">
             <div className="relative w-full max-w-6xl max-h-[90vh] shadow-2xl rounded-2xl overflow-hidden flex items-center justify-center">
+              {/* Left Arrow */}
+              {selectedIndex !== null && selectedIndex > 0 && (
+                <button
+                  onClick={() => {
+                    const prevIndex = selectedIndex - 1;
+                    setSelectedImage(filteredImages[prevIndex].src);
+                    setSelectedIndex(prevIndex);
+                  }}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white rounded-full p-2 hover:bg-purple-700/60 transition-colors z-10"
+                  aria-label="Imagem anterior"
+                >
+                  <ChevronLeft size={40} />
+                </button>
+              )}
+              {/* Right Arrow */}
+              {selectedIndex !== null && selectedIndex < filteredImages.length - 1 && (
+                <button
+                  onClick={() => {
+                    const nextIndex = selectedIndex + 1;
+                    setSelectedImage(filteredImages[nextIndex].src);
+                    setSelectedIndex(nextIndex);
+                  }}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white rounded-full p-2 hover:bg-purple-700/60 transition-colors z-10"
+                  aria-label="Próxima imagem"
+                >
+                  <ChevronRight size={40} />
+                </button>
+              )}
               <img src={selectedImage} alt="Portfolio Image" className="w-full h-auto max-h-[80vh] object-contain rounded-2xl" />
               <button
-                onClick={() => setSelectedImage(null)}
+                onClick={() => { setSelectedImage(null); setSelectedIndex(null); }}
                 className="absolute top-6 right-6 text-white hover:text-purple-400 transition-colors bg-black/50 rounded-full p-3 backdrop-blur-sm"
+                aria-label="Fechar"
               >
                 <X size={40} />
               </button>

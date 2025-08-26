@@ -34,7 +34,7 @@ const Services = () => {
   ];
 
   return (
-    <section id="services" className="py-20 bg-gray-50 dark:bg-gray-800 transition-colors duration-300">
+    <section id="services" className="py-20 bg-gray-50 dark:bg-[#181622] transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -51,7 +51,7 @@ const Services = () => {
           {services.map((service, index) => (
             <div
               key={index}
-              className="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-lg hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300 transform hover:-translate-y-2 group border dark:border-gray-700"
+              className="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-xl hover:shadow-[0_22px_48px_-12px_rgba(147,51,234,0.55)] transition-all duration-300 transform hover:-translate-y-1 group border dark:border-gray-700"
             >
               <div className="text-purple-600 dark:text-purple-400 mb-6 group-hover:scale-110 transition-transform duration-300">
                 {service.icon}

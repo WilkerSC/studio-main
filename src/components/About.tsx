@@ -10,14 +10,14 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="py-20 bg-white dark:bg-[#240826] transition-colors duration-300">
+    <section id="about" className="py-20 bg-white dark:bg-[#140F1E] transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Image */}
           <div className="relative">
             <div className="aspect-[4/5] overflow-hidden bg-gray-100 dark:bg-gray-700 rounded-lg shadow-xl">
               <img
-                src="https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=800&h=1000&fit=crop"
+                src="/SobreMim.jpeg"
                 alt="Sobre o fotógrafo"
                 className="w-full h-full object-cover rounded-lg"
               />
@@ -51,7 +51,7 @@ const About = () => {
             {/* Stats */}
             <div className="grid grid-cols-2 gap-8 mt-12">
               {stats.map((stat, index) => (
-                <div key={index} className="text-center group bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
+                <div key={index} className="text-center group bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-xl hover:shadow-[0_22px_48px_-12px_rgba(147,51,234,0.55)] transition-all duration-300 transform hover:-translate-y-1 hover:scale-105">
                   <div className="text-purple-600 dark:text-purple-400 mb-3 flex justify-center group-hover:scale-110 transition-transform duration-300">
                     {stat.icon}
                   </div>
