@@ -52,6 +52,29 @@ const Portfolio = () => {
       return () => observer.disconnect();
     }, [filteredImages]);
 
+  // Ativa navegação por teclado no lightbox
+  useEffect(() => {
+    if (!selectedImage) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft' && selectedIndex !== null && selectedIndex > 0) {
+        const prevIndex = selectedIndex - 1;
+        setSelectedImage(filteredImages[prevIndex].src);
+        setSelectedIndex(prevIndex);
+      }
+      if (e.key === 'ArrowRight' && selectedIndex !== null && selectedIndex < filteredImages.length - 1) {
+        const nextIndex = selectedIndex + 1;
+        setSelectedImage(filteredImages[nextIndex].src);
+        setSelectedIndex(nextIndex);
+      }
+      if (e.key === 'Escape') {
+        setSelectedImage(null);
+        setSelectedIndex(null);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedImage, selectedIndex, filteredImages]);
+
   return (
     <section id="portfolio" className="py-20 bg-gray-50 dark:bg-[#181622] transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -116,8 +139,8 @@ const Portfolio = () => {
         {/* Lightbox */}
         {selectedImage && (
           <div className="fixed inset-0 bg-black bg-opacity-95 z-50 flex items-center justify-center p-8 backdrop-blur-sm">
-            <div className="relative w-full max-w-6xl max-h-[90vh] shadow-2xl rounded-2xl overflow-hidden flex items-center justify-center">
-              {/* Left Arrow */}
+            <div className="relative flex items-center justify-center w-full h-full">
+              {/* Left Arrow - posição fixa */}
               {selectedIndex !== null && selectedIndex > 0 && (
                 <button
                   onClick={() => {
@@ -125,13 +148,13 @@ const Portfolio = () => {
                     setSelectedImage(filteredImages[prevIndex].src);
                     setSelectedIndex(prevIndex);
                   }}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white rounded-full p-2 hover:bg-purple-700/60 transition-colors z-10"
+                  className="fixed left-12 top-1/2 -translate-y-1/2 bg-black/50 text-white rounded-full p-2 hover:bg-purple-700/60 transition-colors z-50"
                   aria-label="Imagem anterior"
                 >
                   <ChevronLeft size={40} />
                 </button>
               )}
-              {/* Right Arrow */}
+              {/* Right Arrow - posição fixa */}
               {selectedIndex !== null && selectedIndex < filteredImages.length - 1 && (
                 <button
                   onClick={() => {
@@ -139,13 +162,13 @@ const Portfolio = () => {
                     setSelectedImage(filteredImages[nextIndex].src);
                     setSelectedIndex(nextIndex);
                   }}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white rounded-full p-2 hover:bg-purple-700/60 transition-colors z-10"
+                  className="fixed right-12 top-1/2 -translate-y-1/2 bg-black/50 text-white rounded-full p-2 hover:bg-purple-700/60 transition-colors z-50"
                   aria-label="Próxima imagem"
                 >
                   <ChevronRight size={40} />
                 </button>
               )}
-              <img src={selectedImage} alt="Portfolio Image" className="w-full h-auto max-h-[80vh] object-contain rounded-2xl" />
+              <img src={selectedImage} alt="Portfolio Image" style={{ width: 'auto', height: 'auto', maxWidth: '100vw', maxHeight: '90vh' }} />
               <button
                 onClick={() => { setSelectedImage(null); setSelectedIndex(null); }}
                 className="absolute top-6 right-6 text-white hover:text-purple-400 transition-colors bg-black/50 rounded-full p-3 backdrop-blur-sm"
