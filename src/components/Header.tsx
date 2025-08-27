@@ -45,7 +45,7 @@ const Header = () => {
               <button
                 key={item}
                 onClick={() => scrollToSection(['portfolio', 'about', 'services', 'contact'][index])}
-                className="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-medium"
+                className="text-gray-900 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-medium"
               >
                 {item}
               </button>
@@ -85,7 +85,7 @@ const Header = () => {
                 <button
                   key={item}
                   onClick={() => scrollToSection(['portfolio', 'about', 'services', 'contact'][index])}
-                  className="block w-full text-left text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-medium py-2 hover:bg-purple-50 dark:hover:bg-purple-900/20 rounded-lg px-3"
+                  className="block w-full text-left text-gray-900 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-medium py-2 hover:bg-purple-50 dark:hover:bg-purple-900/20 rounded-lg px-3"
                 >
                   {item}
                 </button>

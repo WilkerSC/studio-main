@@ -29,7 +29,7 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="py-20 bg-white dark:bg-[#140F1E] transition-colors duration-300">
+    <section id="about" className="py-20 bg-white dark:bg-[#181622] transition-colors duration-300">
       <div ref={aboutRef} className="max-w-7xl mx-auto px-6 lg:px-8 opacity-0">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Image */}
@@ -46,10 +46,10 @@ const About = () => {
 
           {/* Content */}
           <div>
-            <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-6">
+            <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-6 font-playfair">
               Sobre Mim
             </h2>
-            <div className="space-y-6 text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+            <div className="space-y-6 text-lg text-gray-700 dark:text-gray-300 leading-relaxed font-playfair">
               <p>
                 Sou um fotógrafo profissional apaixonado por capturar a essência única de cada momento. 
                 Com mais de uma década de experiência, especializei-me em retratos íntimos, 

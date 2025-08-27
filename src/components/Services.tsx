@@ -51,14 +51,14 @@ const Services = () => {
   ];
 
   return (
-    <section id="services" className="py-20 bg-gray-50 dark:bg-[#181622] transition-colors duration-300">
+    <section id="services" className="py-20 bg-gray-50 dark:bg-[#140F1E] transition-colors duration-300">
       <div ref={servicesRef} className="max-w-7xl mx-auto px-6 lg:px-8 opacity-0">
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-4">
             Serviços
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto font-playfair">
             Soluções personalizadas para cada necessidade, sempre com a mais alta qualidade
           </p>
         </div>
@@ -84,7 +84,7 @@ const Services = () => {
               
               <ul className="space-y-2 mb-6">
                 {service.features.map((feature, idx) => (
-                  <li key={idx} className="text-sm text-gray-700 dark:text-gray-300 flex items-center">
+                  <li key={idx} className="text-sm text-gray-700 dark:text-gray-300 flex items-center font-playfair">
                     <div className="w-2 h-2 bg-purple-600 rounded-full mr-3 flex-shrink-0"></div>
                     {feature}
                   </li>
