@@ -9,7 +9,7 @@ const About = () => {
           <div className="relative">
             <div className="aspect-[4/5] overflow-hidden bg-gray-100 dark:bg-gray-700 rounded-lg shadow-xl">
               <img
-                src="https://g5vcbby14l69mxgk.public.blob.vercel-storage.com/Fotos_Ibira/SobreMim.jpeg"
+                src="https://g5vcbby14l69mxgk.public.blob.vercel-storage.com/Fotos_Ibira/SobreMim.webp"
                 alt="Sobre o fotógrafo"
                 className="w-full h-full object-cover rounded-lg"
               />

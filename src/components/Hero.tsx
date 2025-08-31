@@ -11,21 +11,19 @@ const Hero = () => {
   };
 
   return (
-    <section id="home" className="relative h-screen overflow-hidden">
-      
-      <div 
-        className="absolute inset-0 shadow-inner"
-        style={{
-          backgroundImage: `linear-gradient(rgba(60, 26, 123, 0.4), rgba(0, 0, 0, 0.5)), url('https://g5vcbby14l69mxgk.public.blob.vercel-storage.com/Fotos_Ibira/TesteLuana2.jpg')`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center top 45%',
-          backgroundRepeat: 'no-repeat',
-          width: '100%',
-          height: '100%'
-        }}
-      />
-
-      
+    <section
+      id="home"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      style={{
+        backgroundImage:
+          "linear-gradient(rgba(60, 26, 123, 0.4), rgba(0, 0, 0, 0.5)), url('https://g5vcbby14l69mxgk.public.blob.vercel-storage.com/Fotos_Ibira/TesteLuana.webp')",
+        backgroundSize: "cover",
+        backgroundPosition: "center top 45%",
+        backgroundRepeat: "no-repeat",
+        width: "100%",
+        minHeight: "100vh"
+      }}
+    >
       <div className="relative z-10 flex items-center justify-center h-full text-center text-white px-6">
         <div className="max-w-4xl">
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-light mb-6 leading-tight">
@@ -48,13 +46,11 @@ const Hero = () => {
           </button>
         </div>
       </div>
-
-      
       <div 
-  onClick={scrollToPortfolio}
-  className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer"
+        onClick={scrollToPortfolio}
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer"
       >
-  <ChevronDown className="text-white w-8 h-8 opacity-70" />
+        <ChevronDown className="text-white w-8 h-8 opacity-70" />
       </div>
     </section>
   );

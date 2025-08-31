@@ -9,12 +9,12 @@ const Portfolio = () => {
 
   const images = [
     
-    { id: 9, src: 'https://g5vcbby14l69mxgk.public.blob.vercel-storage.com/Fotos_Ibira/Foto_5.JPG', category: 'portrait' },
-    { id: 7, src: 'https://g5vcbby14l69mxgk.public.blob.vercel-storage.com/Fotos_Ibira/Cachorro2..JPG', category: 'portrait' },
-    { id: 10, src: 'https://g5vcbby14l69mxgk.public.blob.vercel-storage.com/Fotos_Ibira/Foto_6.JPG', category: 'portrait' },
-    { id: 12, src: 'https://g5vcbby14l69mxgk.public.blob.vercel-storage.com/Fotos_Ibira/Foto1_1.JPG', category: 'portrait' },
-    { id: 11, src: 'https://g5vcbby14l69mxgk.public.blob.vercel-storage.com/Fotos_Ibira/Foto_7.JPG', category: 'portrait' },
-    { id: 26, src: 'https://g5vcbby14l69mxgk.public.blob.vercel-storage.com/Fotos_Ibira/IMG_2067.JPG', category: 'portrait' },
+    { id: 9, src: 'https://g5vcbby14l69mxgk.public.blob.vercel-storage.com/Fotos_Ibira/IMG_2015.webp', category: 'portrait' },
+    { id: 7, src: 'https://g5vcbby14l69mxgk.public.blob.vercel-storage.com/Fotos_Ibira/Cachorro1.webp', category: 'portrait' },
+    { id: 10, src: 'https://g5vcbby14l69mxgk.public.blob.vercel-storage.com/Fotos_Ibira/IMG_1982.webp', category: 'portrait' },
+    { id: 12, src: 'https://g5vcbby14l69mxgk.public.blob.vercel-storage.com/Fotos_Ibira/Foto1_1.webp', category: 'portrait' },
+    { id: 11, src: 'https://g5vcbby14l69mxgk.public.blob.vercel-storage.com/Fotos_Ibira/IMG_1978.webp', category: 'portrait' },
+    { id: 26, src: 'https://g5vcbby14l69mxgk.public.blob.vercel-storage.com/Fotos_Ibira/IMG_2068.webp', category: 'portrait' },
   ];
 
 

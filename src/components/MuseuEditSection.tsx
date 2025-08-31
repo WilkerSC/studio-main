@@ -13,8 +13,8 @@ const MuseuEditSection = () => {
           </p>
         </div>
         <BeforeAfterSlider 
-          beforeSrc="https://g5vcbby14l69mxgk.public.blob.vercel-storage.com/Fotos_Ibira/Foto_3.JPG" 
-          afterSrc="https://g5vcbby14l69mxgk.public.blob.vercel-storage.com/Fotos_Ibira/Foto3_3.JPG" 
+          beforeSrc="https://g5vcbby14l69mxgk.public.blob.vercel-storage.com/Fotos_Ibira/Foto_3.webp" 
+          afterSrc="https://g5vcbby14l69mxgk.public.blob.vercel-storage.com/Fotos_Ibira/Foto3_3.webp" 
           beforeLabel="Antes" 
           afterLabel="Depois" 
         />
