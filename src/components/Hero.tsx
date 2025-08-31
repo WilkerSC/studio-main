@@ -16,7 +16,7 @@ const Hero = () => {
       <div 
         className="absolute inset-0 shadow-inner"
         style={{
-          backgroundImage: `linear-gradient(rgba(60, 26, 123, 0.4), rgba(0, 0, 0, 0.5)), url('/TesteLuana2.jpg')`,
+          backgroundImage: `linear-gradient(rgba(60, 26, 123, 0.4), rgba(0, 0, 0, 0.5)), url('https://g5vcbby14l69mxgk.public.blob.vercel-storage.com/Fotos_Ibira/TesteLuana2.jpg')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center top 45%',
           backgroundRepeat: 'no-repeat',

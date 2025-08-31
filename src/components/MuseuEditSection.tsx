@@ -12,7 +12,12 @@ const MuseuEditSection = () => {
             Veja a diferença da edição na foto arrastando a régua abaixo.
           </p>
         </div>
-        <BeforeAfterSlider beforeSrc="/Foto_3.JPG" afterSrc="/Foto3_3.JPG" beforeLabel="Antes" afterLabel="Depois" />
+        <BeforeAfterSlider 
+          beforeSrc="https://g5vcbby14l69mxgk.public.blob.vercel-storage.com/Fotos_Ibira/Foto_3.JPG" 
+          afterSrc="https://g5vcbby14l69mxgk.public.blob.vercel-storage.com/Fotos_Ibira/Foto3_3.JPG" 
+          beforeLabel="Antes" 
+          afterLabel="Depois" 
+        />
       </div>
     </section>
   );
