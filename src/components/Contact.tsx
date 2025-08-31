@@ -1,28 +1,10 @@
 // Nunca exponha dados sensíveis, tokens ou senhas neste arquivo ou em qualquer arquivo do front-end.
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import emailjs from 'emailjs-com';
 import { MapPin, Phone, Mail, Send, CheckCircle } from 'lucide-react';
 
 const Contact = () => {
-  const contactRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const el = contactRef.current;
-    if (!el) return;
-    const observer = new window.IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          (entry.target as HTMLElement).classList.add('animate-fade-in-up');
-        } else {
-          (entry.target as HTMLElement).classList.remove('animate-fade-in-up');
-          (entry.target as HTMLElement).style.transition = 'opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1)';
-          (entry.target as HTMLElement).style.opacity = '0';
-          (entry.target as HTMLElement).style.transform = 'translateY(24px) scale(1)';
-        }
-      });
-    }, { threshold: 0.15 });
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
+  // Animação de scroll removida para otimização
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -34,9 +16,25 @@ const Contact = () => {
   const [error, setError] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    let newValue = value;
+    if (name === 'phone') {
+      // Remove tudo que não é número
+      const digits = value.replace(/\D/g, '');
+      // Aplica a máscara
+      if (digits.length <= 2) {
+        newValue = digits;
+      } else if (digits.length <= 7) {
+        newValue = `(${digits.slice(0,2)}) ${digits.slice(2)}`;
+      } else if (digits.length <= 11) {
+        newValue = `(${digits.slice(0,2)}) ${digits.slice(2,7)}-${digits.slice(7,11)}`;
+      } else {
+        newValue = `(${digits.slice(0,2)}) ${digits.slice(2,7)}-${digits.slice(7,11)}`;
+      }
+    }
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: newValue
     });
   };
 
@@ -103,16 +101,16 @@ const Contact = () => {
     {
       icon: <MapPin className="w-6 h-6" />,
       title: 'Localização',
-      content: 'São Paulo, SP - Brasil\nAtendimento em todo território nacional'
+      content: 'São Paulo, SP - Brasil'
     },
     {
       icon: <Phone className="w-6 h-6" />,
       title: 'Telefone',
       content: (
         <>
-          +55 (11) 98366-9273<br />
+          +55 (11) 96169-8314<br />
           <a
-            href="https://wa.me/5511983669273"
+            href="https://wa.me/5511961698314"
             target="_blank"
             rel="noopener noreferrer"
             className="text-purple-600 underline"
@@ -125,13 +123,24 @@ const Contact = () => {
     {
       icon: <Mail className="w-6 h-6" />,
       title: 'Email',
-      content: 'contato@studio.com.br\nResposta em até 24h'
+      content: (
+        <>
+          <a
+            href="mailto:lequeluana@gmail.com"
+            className="text-purple-600 underline"
+          >
+            lequeluana@gmail.com
+          </a>
+          <br />
+          Resposta em até 24h
+        </>
+      )
     }
   ];
 
   return (
-  <section id="contact" className="py-20 bg-white dark:bg-[#181622] transition-colors duration-300">
-      <div ref={contactRef} className="max-w-7xl mx-auto px-6 lg:px-8 opacity-0">
+  <section id="contact" className="py-20 bg-white dark:bg-[#140F1E] transition-colors duration-300">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-6 font-playfair">
@@ -198,6 +207,7 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
+                    placeholder="Digite seu nome completo"
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors bg-white dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm"
                   />
                 </div>
@@ -211,6 +221,7 @@ const Contact = () => {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
+                    placeholder="(11) 9999-9999"
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors bg-white dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm"
                   />
                 </div>
@@ -227,6 +238,7 @@ const Contact = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
+                  placeholder="seu@email.com"
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors bg-white dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm"
                 />
               </div>
@@ -247,6 +259,7 @@ const Contact = () => {
                   <option value="Casamentos">Casamentos</option>
                   <option value="Eventos Familiares">Eventos Familiares</option>
                   <option value="Corporativo">Corporativo</option>
+                  <option value="Outro">Outro</option>
                 </select>
               </div>
 

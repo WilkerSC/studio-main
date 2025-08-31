@@ -36,11 +36,13 @@ const Hero = () => {
             <TypingEffect text={"Eternos"} speed={120} className="font-playfair" />
           </h1>
           <p className="text-xl md:text-2xl font-light mb-12 max-w-2xl mx-auto leading-relaxed opacity-90">
-            <TypingEffect text={"Fotógrafo profissional especializado em retratos, casamentos e eventos corporativos"} speed={40} className="font-playfair" />
+            <span className="whitespace-nowrap max-w-full block">
+              <TypingEffect text={"Cada imagem conta uma história, Cada projeto é uma obra de arte."} speed={40} className="font-playfair" />
+            </span>
           </p>
           <button 
             onClick={scrollToPortfolio}
-            className="inline-flex items-center px-8 py-4 bg-purple-600 text-white font-medium rounded-lg hover:bg-purple-500 transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl hover:shadow-purple-500/25"
+            className="inline-flex items-center px-8 py-4 bg-purple-600 text-white font-medium rounded-lg hover:bg-purple-500 shadow-xl"
           >
             Ver Portfólio
           </button>
@@ -49,10 +51,10 @@ const Hero = () => {
 
       {/* Scroll Indicator */}
       <div 
-        onClick={scrollToPortfolio}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer animate-bounce"
+  onClick={scrollToPortfolio}
+  className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer"
       >
-        <ChevronDown className="text-white w-8 h-8 opacity-70 hover:opacity-100 transition-opacity" />
+  <ChevronDown className="text-white w-8 h-8 opacity-70" />
       </div>
     </section>
   );

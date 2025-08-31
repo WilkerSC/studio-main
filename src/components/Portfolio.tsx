@@ -4,27 +4,21 @@ import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 const Portfolio = () => {
   // Ref para grid de imagens
   const gridRef = useRef<HTMLDivElement>(null);
-  const [filter, setFilter] = useState('all');
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   const images = [
-    { id: 7, src: '/Cachorro2..JPG', category: 'portrait', title: 'Cachorro' },
-    { id: 9, src: '/Foto_5.JPG', category: 'portrait', title: 'Foto 5' },
-    { id: 10, src: '/Foto_6.JPG', category: 'portrait', title: 'Foto 6' },
-    { id: 11, src: '/Foto_7.JPG', category: 'portrait', title: 'Foto 7' },
-    { id: 12, src: '/Foto1_1.JPG', category: 'portrait', title: 'Foto 1_1' },
-    { id: 26, src: '/IMG_2067.JPG', category: 'portrait', title: 'IMG 2067' },
+    
+    { id: 9, src: '/Foto_5.JPG', category: 'portrait' },
+    { id: 7, src: '/Cachorro2..JPG', category: 'portrait' },
+    { id: 10, src: '/Foto_6.JPG', category: 'portrait' },
+    { id: 12, src: '/Foto1_1.JPG', category: 'portrait' },
+    { id: 11, src: '/Foto_7.JPG', category: 'portrait' },
+    { id: 26, src: '/IMG_2067.JPG', category: 'portrait' },
   ];
 
-  const categories = [
-    { id: 'all', label: 'Todos' },
-    { id: 'portrait', label: 'Retratos' },
-    { id: 'wedding', label: 'Casamentos' },
-    { id: 'corporate', label: 'Corporativo' }
-  ];
 
-  const filteredImages = filter === 'all' ? images : images.filter(img => img.category === filter);
+  const filteredImages = images;
   // Transição de scroll removida para otimização
 
   // Ativa navegação por teclado no lightbox
@@ -55,28 +49,12 @@ const Portfolio = () => {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Cabeçalho */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-4">Portfólio</h2>
+          <h2 className="text-4xl md:text-5xl font-playfair text-gray-900 dark:text-white mb-4">Portfólio</h2>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Uma seleção cuidadosa dos meus trabalhos mais marcantes
           </p>
         </div>
 
-        {/* Filtros */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12 drop-shadow-sm">
-          {categories.map(category => (
-            <button
-              key={category.id}
-              onClick={() => setFilter(category.id)}
-              className={`px-6 py-2 rounded-sm font-medium transition-all duration-300 ${
-                filter === category.id
-                  ? 'bg-purple-600 text-white shadow-purple-500/25'
-                  : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-purple-50 dark:hover:bg-purple-900/20 hover:text-purple-600 dark:hover:text-purple-400'
-              }`}
-            >
-              {category.label}
-            </button>
-          ))}
-        </div>
 
         {/* GRID grande */}
   <div ref={gridRef} className="grid grid-cols-[repeat(auto-fit,minmax(330px,1fr))] gap-8 xl:gap-12">
@@ -89,24 +67,22 @@ const Portfolio = () => {
               }}
               className="group relative overflow-hidden rounded-3xl bg-gray-200 dark:bg-gray-700 cursor-pointer
                          shadow-xl ring-1 ring-black/5 dark:ring-white/10
-                         transition-all duration-300 hover:-translate-y-1
-                         hover:ring-2 hover:ring-purple-500/60
-                         hover:shadow-[0_22px_48px_-12px_rgba(147,51,234,0.55)]"
+                         transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 hover:shadow-[0_22px_48px_-12px_rgba(147,51,234,0.55)]"
             >
               <div className="aspect-[3/4] w-full">
                 <img
                   src={image.src}
-                  alt={image.title}
+                  
                   loading="lazy"
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 select-none pointer-events-none"
+                  className="w-full h-full object-cover select-none pointer-events-none transition-transform duration-300 group-hover:scale-110"
                   draggable={false}
                   onContextMenu={e => e.preventDefault()}
                 />
               </div>
 
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <div className="pointer-events-none absolute bottom-4 left-4 text-white text-lg font-semibold drop-shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                {image.title}
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent group-hover:shadow-[0_0_32px_8px_rgba(147,51,234,0.35)] group-hover:bg-purple-700/10 transition-all duration-300" />
+              <div className="pointer-events-none absolute bottom-4 left-4 text-white text-lg font-semibold drop-shadow-lg">
+                <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
               </div>
             </div>
           ))}

@@ -36,15 +36,15 @@ const Header = () => {
             onClick={() => scrollToSection('home')}
             className="text-2xl font-bold text-gray-900 dark:text-white cursor-pointer hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
           >
-            STUDIO
+            LC Filmsx
           </div>
 
           {/* Desktop Menu & Theme Toggle */}
           <div className="hidden md:flex items-center space-x-8">
-            {['Portfólio', 'Sobre', 'Serviços', 'Contato'].map((item, index) => (
+            {['Portfólio', 'Sobre', 'Contato'].map((item, index) => (
               <button
                 key={item}
-                onClick={() => scrollToSection(['portfolio', 'about', 'services', 'contact'][index])}
+                onClick={() => scrollToSection(['portfolio', 'about', 'contact'][index])}
                 className="text-gray-900 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-medium"
               >
                 {item}
@@ -81,10 +81,10 @@ const Header = () => {
         {isMobileMenuOpen && (
           <div className="md:hidden absolute top-16 left-0 right-0 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-xl dark:shadow-purple-500/20 border-t dark:border-gray-700">
             <div className="px-6 py-4 space-y-4">
-              {['Portfólio', 'Sobre', 'Serviços', 'Contato'].map((item, index) => (
+              {['Portfólio', 'Sobre', 'Contato'].map((item, index) => (
                 <button
                   key={item}
-                  onClick={() => scrollToSection(['portfolio', 'about', 'services', 'contact'][index])}
+                  onClick={() => scrollToSection(['portfolio', 'about', 'contact'][index])}
                   className="block w-full text-left text-gray-900 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-medium py-2 hover:bg-purple-50 dark:hover:bg-purple-900/20 rounded-lg px-3"
                 >
                   {item}
