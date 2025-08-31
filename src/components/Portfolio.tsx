@@ -27,7 +27,7 @@ const Portfolio = () => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowLeft' && selectedIndex !== null && selectedIndex > 0) {
         const prevIndex = selectedIndex - 1;
-        setSelectedImage(filteredImages[prevIndex].src);
+  
         setSelectedIndex(prevIndex);
       }
       if (e.key === 'ArrowRight' && selectedIndex !== null && selectedIndex < filteredImages.length - 1) {

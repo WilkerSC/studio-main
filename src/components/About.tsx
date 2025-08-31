@@ -5,7 +5,7 @@ const About = () => {
     <section id="about" className="py-20 bg-gray-50 dark:bg-[#181622] transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          {/* Image */}
+                    
           <div className="relative">
             <div className="aspect-[4/5] overflow-hidden bg-gray-100 dark:bg-gray-700 rounded-lg shadow-xl">
               <img
@@ -17,7 +17,7 @@ const About = () => {
             <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-purple-600 rounded-lg shadow-xl"></div>
           </div>
 
-          {/* Content */}
+                    
           <div>
             <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-6 font-playfair">
               Sobre Mim

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 interface TypingEffectProps {
   text: string;
-  speed?: number; // ms por caractere
+  speed?: number;
   className?: string;
 }
 

@@ -9,7 +9,7 @@ const MuseuEditSection = () => {
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-4 font-playfair">Edição Antes e Depois</h2>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto font-playfair">
-            Veja a diferença da edição na foto do museu arrastando a régua abaixo.
+            Veja a diferença da edição na foto arrastando a régua abaixo.
           </p>
         </div>
         <BeforeAfterSlider beforeSrc="/Foto_3.JPG" afterSrc="/Foto3_3.JPG" beforeLabel="Antes" afterLabel="Depois" />

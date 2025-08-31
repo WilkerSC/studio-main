@@ -31,7 +31,6 @@ const Header = () => {
     }`}>
       <nav className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
           <div 
             onClick={() => scrollToSection('home')}
             className="text-2xl font-bold text-gray-900 dark:text-white cursor-pointer hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
@@ -51,7 +50,6 @@ const Header = () => {
               </button>
             ))}
             
-            {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
               className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-purple-100 dark:hover:bg-purple-900/30 hover:text-purple-600 dark:hover:text-purple-400 transition-all duration-300 shadow-md hover:shadow-lg"

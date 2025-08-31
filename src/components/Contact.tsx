@@ -1,10 +1,8 @@
-// Nunca exponha dados sensíveis, tokens ou senhas neste arquivo ou em qualquer arquivo do front-end.
 import React, { useState } from 'react';
 import emailjs from 'emailjs-com';
 import { MapPin, Phone, Mail, Send, CheckCircle } from 'lucide-react';
 
 const Contact = () => {
-  // Animação de scroll removida para otimização
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -12,16 +10,14 @@ const Contact = () => {
     service: '',
     message: ''
   });
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [showModal, setShowModal] = useState<'success' | 'error' | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     let newValue = value;
     if (name === 'phone') {
-      // Remove tudo que não é número
       const digits = value.replace(/\D/g, '');
-      // Aplica a máscara
       if (digits.length <= 2) {
         newValue = digits;
       } else if (digits.length <= 7) {
@@ -41,13 +37,11 @@ const Contact = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
-    // Honeypot: se preenchido, não envia
     const honeypot = (document.querySelector('input[name="company"]') as HTMLInputElement)?.value;
     if (honeypot) {
       setError('Envio bloqueado por segurança.');
       return;
     }
-    // Validação extra
     if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
       setError('Preencha todos os campos obrigatórios corretamente.');
       return;
@@ -62,38 +56,37 @@ const Contact = () => {
   const templateID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
   const userID = import.meta.env.VITE_EMAILJS_USER_ID;
 
-    // Envia para você
     const templateParams = {
       from_name: formData.name,
       from_email: formData.email,
       phone: formData.phone,
       service: formData.service,
       message: formData.message,
-      to_email: 'luana.leque123@gmail.com',
+      to_email: 'lequeluana@gmail.com',
     };
 
-    // Envia confirmação para o usuário
-    const confirmTemplateID = 'template_8nsdqur'; // Crie esse template no EmailJS
+  const confirmTemplateID = 'template_8nsdqur';
     const confirmParams = {
       to_name: formData.name,
-      to_email: formData.email, // Certifique-se que o template de confirmação usa {{to_email}} no campo 'To'
+      to_email: formData.email,
     };
 
     emailjs.send(serviceID, templateID, templateParams, userID)
       .then(() => {
-        // Só envia confirmação se não houver erro
+
         emailjs.send(serviceID, confirmTemplateID, confirmParams, userID)
           .then(() => {
-            setIsSubmitted(true);
-            setTimeout(() => setIsSubmitted(false), 3000);
+            setShowModal('success');
             setFormData({ name: '', email: '', phone: '', service: '', message: '' });
           })
           .catch(() => {
-            setError('Mensagem enviada, mas não foi possível enviar a confirmação para seu e-mail.');
+            setShowModal('success');
+            setFormData({ name: '', email: '', phone: '', service: '', message: '' });
           });
       })
       .catch(() => {
         setError('Ocorreu um erro ao enviar. Tente novamente mais tarde.');
+        setShowModal('error');
       });
   };
 
@@ -141,7 +134,7 @@ const Contact = () => {
   return (
   <section id="contact" className="py-20 bg-white dark:bg-[#140F1E] transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        {/* Section Header */}
+        
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-light text-gray-900 dark:text-white mb-6 font-playfair">
             Contato
@@ -152,7 +145,7 @@ const Contact = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-          {/* Contact Info */}
+          
           <div>
             <h3 className="text-2xl font-light text-gray-900 dark:text-white mb-8">
               Vamos conversar
@@ -171,28 +164,35 @@ const Contact = () => {
               ))}
             </div>
 
-            {/* Success/Error Message */}
-            {isSubmitted && (
-              <div className="mt-8 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700 rounded-lg shadow-md">
-                <div className="flex items-center text-green-700">
-                  <CheckCircle className="w-5 h-5 mr-2" />
-                  <span className="font-medium">Mensagem enviada com sucesso!</span>
+            
+            {showModal === 'success' && (
+              <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+                <div className="bg-white dark:bg-gray-900 rounded-lg shadow-xl p-8 text-center max-w-sm mx-auto">
+                  <CheckCircle className="w-10 h-10 mx-auto text-green-600 mb-4" />
+                  <h4 className="text-xl font-semibold mb-2 text-green-700 dark:text-green-400">Mensagem enviada com sucesso!</h4>
+                  <p className="text-gray-700 dark:text-gray-300 mb-6">Entraremos em contato em breve.</p>
+                  <button
+                    className="bg-purple-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-purple-700 transition"
+                    onClick={() => { setShowModal(null); }}
+                  >Fechar</button>
                 </div>
-                <p className="text-green-600 dark:text-green-400 text-sm mt-1">
-                  Entraremos em contato em breve.
-                </p>
               </div>
             )}
-            {error && (
-              <div className="mt-8 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-700 rounded-lg shadow-md">
-                <div className="flex items-center text-red-700">
-                  <span className="font-medium">{error}</span>
+            {showModal === 'error' && (
+              <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+                <div className="bg-white dark:bg-gray-900 rounded-lg shadow-xl p-8 text-center max-w-sm mx-auto">
+                  <h4 className="text-xl font-semibold mb-2 text-red-700 dark:text-red-400">Erro ao enviar mensagem</h4>
+                  <p className="text-gray-700 dark:text-gray-300 mb-6">{error}</p>
+                  <button
+                    className="bg-purple-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-purple-700 transition"
+                    onClick={() => setShowModal(null)}
+                  >Tentar novamente</button>
                 </div>
               </div>
             )}
           </div>
 
-          {/* Contact Form */}
+          
           <div>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -286,7 +286,6 @@ const Contact = () => {
                 <Send className="w-5 h-5" />
                 <span>Enviar Mensagem</span>
               </button>
-              {/* Honeypot para SPAM */}
               <input type="text" name="company" style={{display: 'none'}} autoComplete="off" tabIndex={-1} />
             </form>
           </div>

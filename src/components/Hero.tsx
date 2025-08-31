@@ -12,7 +12,7 @@ const Hero = () => {
 
   return (
     <section id="home" className="relative h-screen overflow-hidden">
-      {/* Background Image */}
+      
       <div 
         className="absolute inset-0 shadow-inner"
         style={{
@@ -25,7 +25,7 @@ const Hero = () => {
         }}
       />
 
-      {/* Content */}
+      
       <div className="relative z-10 flex items-center justify-center h-full text-center text-white px-6">
         <div className="max-w-4xl">
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-light mb-6 leading-tight">
@@ -49,7 +49,7 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Scroll Indicator */}
+      
       <div 
   onClick={scrollToPortfolio}
   className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer"
