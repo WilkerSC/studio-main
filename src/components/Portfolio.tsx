@@ -9,12 +9,12 @@ const Portfolio = () => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   const images = [
-    { id: 1, src: '/Coraline.jpeg', category: 'portrait',  title: 'Retrato Elegante' },
-    { id: 2, src: '/Flor.jpeg', category: 'wedding',   title: 'Momento Único' },
-    { id: 3, src: '/Fonte.jpeg', category: 'portrait',  title: 'Expressão Natural' },
-    { id: 4, src: '/Foto_Luana.jpeg', category: 'corporate', title: 'Profissionalismo' },
-    { id: 5, src: '/Museu.jpeg', category: 'wedding',   title: 'Celebração' },
-    { id: 6, src: '/Pinheiro.jpeg', category: 'portrait',  title: 'Intimidade' },
+    { id: 7, src: '/Cachorro2..JPG', category: 'portrait', title: 'Cachorro' },
+    { id: 9, src: '/Foto_5.JPG', category: 'portrait', title: 'Foto 5' },
+    { id: 10, src: '/Foto_6.JPG', category: 'portrait', title: 'Foto 6' },
+    { id: 11, src: '/Foto_7.JPG', category: 'portrait', title: 'Foto 7' },
+    { id: 12, src: '/Foto1_1.JPG', category: 'portrait', title: 'Foto 1_1' },
+    { id: 26, src: '/IMG_2067.JPG', category: 'portrait', title: 'IMG 2067' },
   ];
 
   const categories = [
@@ -25,32 +25,7 @@ const Portfolio = () => {
   ];
 
   const filteredImages = filter === 'all' ? images : images.filter(img => img.category === filter);
-    useEffect(() => {
-      const grid = gridRef?.current;
-      if (!grid) return;
-      const children = Array.from(grid.children);
-      // Inicialmente, todos invisíveis
-      children.forEach((child) => {
-        (child as HTMLElement).style.opacity = '0';
-        (child as HTMLElement).style.transform = 'translateY(24px) scale(1)';
-      });
-      const observer = new window.IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            (entry.target as HTMLElement).classList.add('animate-fade-in-up');
-          } else {
-            (entry.target as HTMLElement).classList.remove('animate-fade-in-up');
-            (entry.target as HTMLElement).style.transition = 'opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1)';
-            (entry.target as HTMLElement).style.opacity = '0';
-            (entry.target as HTMLElement).style.transform = 'translateY(24px) scale(1)';
-          }
-        });
-      }, { threshold: 0.15 });
-      children.forEach((child) => {
-        observer.observe(child);
-      });
-      return () => observer.disconnect();
-    }, [filteredImages]);
+  // Transição de scroll removida para otimização
 
   // Ativa navegação por teclado no lightbox
   useEffect(() => {
@@ -122,6 +97,7 @@ const Portfolio = () => {
                 <img
                   src={image.src}
                   alt={image.title}
+                  loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 select-none pointer-events-none"
                   draggable={false}
                   onContextMenu={e => e.preventDefault()}

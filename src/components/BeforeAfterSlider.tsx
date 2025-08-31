@@ -9,26 +9,7 @@ interface BeforeAfterSliderProps {
 
 const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({ beforeSrc, afterSrc, beforeLabel = 'Antes', afterLabel = 'Depois' }) => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  React.useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(24px) scale(1)';
-    const observer = new window.IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          (entry.target as HTMLElement).classList.add('animate-fade-in-up');
-        } else {
-          (entry.target as HTMLElement).classList.remove('animate-fade-in-up');
-          (entry.target as HTMLElement).style.transition = 'opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1)';
-          (entry.target as HTMLElement).style.opacity = '0';
-          (entry.target as HTMLElement).style.transform = 'translateY(24px) scale(1)';
-        }
-      });
-    }, { threshold: 0.15 });
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
+  // Animação de scroll removida para otimização
   const containerRef = useRef<HTMLDivElement>(null);
   const [sliderPos, setSliderPos] = useState<number>(50);
 
@@ -37,7 +18,7 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({ beforeSrc, afterS
   };
 
   return (
-    <div ref={sectionRef} className="w-full py-16 opacity-0">
+  <div ref={sectionRef} className="w-full py-16">
       <div className="flex justify-between mb-4 text-lg font-playfair text-gray-700 dark:text-gray-300"
         style={{ paddingLeft: 'calc((100vw - 92vw)/2 + 24px)', paddingRight: 'calc((100vw - 92vw)/2 + 24px)' }}>
         <span>{beforeLabel}</span>
