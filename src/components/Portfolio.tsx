@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const Portfolio = () => {
-  // Ref para grid de imagens
+
   const gridRef = useRef<HTMLDivElement>(null);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -19,9 +19,6 @@ const Portfolio = () => {
 
 
   const filteredImages = images;
-  // Transição de scroll removida para otimização
-
-  // Ativa navegação por teclado no lightbox
   useEffect(() => {
     if (!selectedImage) return;
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -72,8 +69,6 @@ const Portfolio = () => {
               <div className="aspect-[3/4] w-full">
                 <img
                   src={image.src}
-                  
-                  loading="lazy"
                   className="w-full h-full object-cover select-none pointer-events-none transition-transform duration-300 group-hover:scale-110"
                   draggable={false}
                   onContextMenu={e => e.preventDefault()}
