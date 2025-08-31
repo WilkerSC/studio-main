@@ -91,43 +91,48 @@ const Portfolio = () => {
         {/* Lightbox */}
         {selectedImage && (
           <div className="fixed inset-0 bg-black bg-opacity-95 z-50 flex items-center justify-center p-8 backdrop-blur-sm">
-            <div className="relative flex items-center justify-center w-full h-full">
-              {/* Left Arrow - posição fixa */}
-              {selectedIndex !== null && selectedIndex > 0 && (
-                <button
-                  onClick={() => {
-                    const prevIndex = selectedIndex - 1;
-                    setSelectedImage(filteredImages[prevIndex].src);
-                    setSelectedIndex(prevIndex);
-                  }}
-                  className="fixed left-12 top-1/2 -translate-y-1/2 bg-black/50 text-white rounded-full p-2 hover:bg-purple-700/60 transition-colors z-50"
-                  aria-label="Imagem anterior"
-                >
-                  <ChevronLeft size={40} />
-                </button>
-              )}
-              {/* Right Arrow - posição fixa */}
-              {selectedIndex !== null && selectedIndex < filteredImages.length - 1 && (
-                <button
-                  onClick={() => {
-                    const nextIndex = selectedIndex + 1;
-                    setSelectedImage(filteredImages[nextIndex].src);
-                    setSelectedIndex(nextIndex);
-                  }}
-                  className="fixed right-12 top-1/2 -translate-y-1/2 bg-black/50 text-white rounded-full p-2 hover:bg-purple-700/60 transition-colors z-50"
-                  aria-label="Próxima imagem"
-                >
-                  <ChevronRight size={40} />
-                </button>
-              )}
-              <img src={selectedImage} alt="Portfolio Image" style={{ width: 'auto', height: 'auto', maxWidth: '100vw', maxHeight: '90vh' }} />
+            <div className="relative flex flex-col items-center justify-center w-full h-full">
+              {/* Fechar */}
               <button
                 onClick={() => { setSelectedImage(null); setSelectedIndex(null); }}
-                className="absolute top-6 right-6 text-white hover:text-purple-400 transition-colors bg-black/50 rounded-full p-3 backdrop-blur-sm"
+                className="absolute top-2 right-2 md:top-6 md:right-6 text-white hover:text-purple-400 transition-colors bg-black/60 rounded-full p-2 md:p-3 backdrop-blur-sm"
+                style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.18)' }}
                 aria-label="Fechar"
               >
-                <X size={40} />
+                <X size={28} className="md:w-10 md:h-10 w-7 h-7" />
               </button>
+              <img src={selectedImage} alt="Portfolio Image" style={{ width: 'auto', height: 'auto', maxWidth: '100vw', maxHeight: '80vh' }} />
+              {/* Setas abaixo da imagem no mobile, laterais no desktop */}
+              <div className="flex w-full justify-center items-center mt-4 md:mt-0 md:absolute md:top-1/2 md:left-0 md:right-0 md:justify-between">
+                {selectedIndex !== null && selectedIndex > 0 && (
+                  <button
+                    onClick={() => {
+                      const prevIndex = selectedIndex - 1;
+                      setSelectedImage(filteredImages[prevIndex].src);
+                      setSelectedIndex(prevIndex);
+                    }}
+                    className="bg-black/60 text-white rounded-full p-2 md:p-3 hover:bg-purple-700/60 transition-colors z-50 mx-4 md:mx-0 md:fixed md:left-2 md:top-1/2 md:-translate-y-1/2"
+                    style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.18)' }}
+                    aria-label="Imagem anterior"
+                  >
+                    <ChevronLeft size={28} className="md:w-10 md:h-10 w-7 h-7" />
+                  </button>
+                )}
+                {selectedIndex !== null && selectedIndex < filteredImages.length - 1 && (
+                  <button
+                    onClick={() => {
+                      const nextIndex = selectedIndex + 1;
+                      setSelectedImage(filteredImages[nextIndex].src);
+                      setSelectedIndex(nextIndex);
+                    }}
+                    className="bg-black/60 text-white rounded-full p-2 md:p-3 hover:bg-purple-700 transition-colors z-50 mx-4 md:mx-0 md:fixed md:right-2 md:top-1/2 md:-translate-y-1/2"
+                    style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.18)' }}
+                    aria-label="Próxima imagem"
+                  >
+                    <ChevronRight size={28} className="md:w-10 md:h-10 w-7 h-7" />
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         )}
