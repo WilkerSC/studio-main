@@ -1,24 +1,49 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { supabase } from '../lib/supabase';
+
+interface PortfolioImage {
+  id: string;
+  title: string;
+  description: string | null;
+  image_url: string;
+  category: string;
+  order_index: number;
+}
 
 const Portfolio = () => {
-
   const gridRef = useRef<HTMLDivElement>(null);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [images, setImages] = useState<PortfolioImage[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const images = [
-    
-    { id: 9, src: 'https://g5vcbby14l69mxgk.public.blob.vercel-storage.com/Fotos_Ibira/IMG_2015.webp', category: 'portrait' },
-    { id: 7, src: 'https://g5vcbby14l69mxgk.public.blob.vercel-storage.com/Fotos_Ibira/Cachorro1.webp', category: 'portrait' },
-    { id: 10, src: 'https://g5vcbby14l69mxgk.public.blob.vercel-storage.com/Fotos_Ibira/IMG_1982.webp', category: 'portrait' },
-    { id: 12, src: 'https://g5vcbby14l69mxgk.public.blob.vercel-storage.com/Fotos_Ibira/Foto1_1.webp', category: 'portrait' },
-    { id: 11, src: 'https://g5vcbby14l69mxgk.public.blob.vercel-storage.com/Fotos_Ibira/IMG_1978.webp', category: 'portrait' },
-    { id: 26, src: 'https://g5vcbby14l69mxgk.public.blob.vercel-storage.com/Fotos_Ibira/IMG_2068.webp', category: 'portrait' },
-  ];
+  useEffect(() => {
+    loadImages();
+  }, []);
 
+  const loadImages = async () => {
+    setLoading(true);
+    const { data, error } = await supabase
+      .from('portfolio_images')
+      .select('*')
+      .eq('category', 'portfolio')
+      .order('order_index', { ascending: true })
+      .limit(6);
 
-  const filteredImages = images;
+    if (!error && data) {
+      setImages(data);
+    }
+    setLoading(false);
+  };
+
+  const filteredImages = images.map(img => ({
+    id: img.id,
+    src: img.image_url,
+    category: img.category,
+    title: img.title
+  }));
   useEffect(() => {
     if (!selectedImage) return;
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -53,9 +78,19 @@ const Portfolio = () => {
         </div>
 
 
-        {/* GRID grande */}
-  <div ref={gridRef} className="grid grid-cols-[repeat(auto-fit,minmax(330px,1fr))] gap-8 xl:gap-12">
-          {filteredImages.map((image) => (
+        {/* Loading State */}
+        {loading ? (
+          <div className="text-center py-12">
+            <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-purple-600 border-t-transparent"></div>
+            <p className="mt-4 text-gray-600 dark:text-gray-300">Carregando imagens...</p>
+          </div>
+        ) : filteredImages.length === 0 ? (
+          <div className="text-center py-12">
+            <p className="text-gray-600 dark:text-gray-300">Nenhuma imagem disponível no momento.</p>
+          </div>
+        ) : (
+          <div ref={gridRef} className="grid grid-cols-[repeat(auto-fit,minmax(330px,1fr))] gap-8 xl:gap-12">
+            {filteredImages.map((image) => (
             <div
               key={image.id}
               onClick={() => {
@@ -81,7 +116,20 @@ const Portfolio = () => {
               </div>
             </div>
           ))}
-        </div>
+          </div>
+        )}
+
+        {!loading && filteredImages.length > 0 && (
+          <div className="text-center mt-12">
+            <Link
+              to="/collections"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl font-medium"
+            >
+              Ver Todas as Coleções
+              <ArrowRight size={20} />
+            </Link>
+          </div>
+        )}
 
         {/* Lightbox */}
         {selectedImage && (
